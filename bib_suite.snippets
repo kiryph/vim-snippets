@@ -1,0 +1,40 @@
+# vim-latex has defined three letter IMAP macros for bibfiles which incorporate
+# information which fields are required (BBB), common (BBL), uncommon (BBH) and extra (BBX).
+# See for more details here
+#
+#     https://github.com/vim-latex/vim-latex/blob/master/ftplugin/latex-suite/bibtex.vim
+#
+# In order to replicate these intelligent macros, the snippets must also be 'smart':
+#
+#   1. SIMPLE SOLUTION (TODO): define snippets by bib entry type and make fields optional, e.g.:
+#
+#   snippet art "Article" b
+#   @article{key,
+#      name = {$1:required},
+#      ${2:isbn = ${3:common optional field}},
+#      ${4:url = ${5:uncommon optional field}},
+#      ${6:extra = ${7:extra optional field}},
+#   }
+#   endsnippet
+#
+#   This could extend https://github.com/honza/vim-snippets/blob/master/UltiSnips/bib.snippets
+#   This would not be a replication in the spirit of vim-latex (new trigger words).
+#   NOTE: user can list trigger words in INSERT MODE with <C-TAB> (default).
+#
+#   2. ADVANCED SOLUTION (TODO): use python code to reimplement it
+#
+#    snippet "BBB( (\S+))?"
+#    \@${1:`!p
+#       snip.rv = match.group(3) if match.group(2) is not None else "something"`}}
+#    ${2:${VISUAL}}
+#    \end{$1}$0
+#    endsnippet
+#
+#    USAGE:
+#     BBB article<tab>
+#     BBB<tab>article<tab>
+#
+#   ---------------------
+#
+#   Consider using other tools for creating new entries in bibfiles which also tell which fields are required.
+#   (copy from internet, jabref, mendeley, bibdesk)

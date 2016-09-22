@@ -1,0 +1,322 @@
+# ---------------------------------------------
+# Snippets replicating LaTeX-Suite IMAP macros:
+# ---------------------------------------------
+#
+#   https://github.com/vim-latex/vim-latex/blob/master/ftplugin/latex-suite/envmacros.vim
+#
+#       Structure : EAB, EAP, ECE, EDO, EFC, EFL, EFR, EQN, EQE,
+#                   ESP, ETP, EVM, EVE, ETB, ENO, EOV, ESL
+#
+#           Lists : ELI, EDE, EEN, EIT, ETI, ETL
+#
+#          Tables : ETE, ETG, ETR
+#             New : ETA, EBT
+#
+#            Math : EAL, EAR, EDM, EEA, EEQ, EMA
+#
+#        Sections : SPA, SCH, SSE, SSS, SS2, SPG, SSP
+#
+#   Miscellaneous : EFI, ELR, EMP, EPI
+#             New : EFG
+#
+#
+#   https://github.com/vim-latex/vim-latex/blob/master/ftplugin/latex-suite/elementmacros.vim
+#
+# TODO:
+#      series : FBF, FMD
+#      family : FTT, FSF, FRM
+#       shape : FUP, FSL, FSC, FIT
+#   emphasize : FEM
+
+# NOTES:
+# ------
+#
+# - Auto expansion can be enabled in UltiSnips:
+#    1) by adding the option A to the snippets (vim 7.4.214 or newer)
+#    2) by defining inoremaps as shown here
+#     `https://github.com/lervag/vimtex/blob/master/doc/vimtex.txt#L1365-L1367`
+#
+#   Auto expansion is not recommended, use tab triggering.
+#
+# - Snippet option b means triggering only possibly if trigger word at BOL
+#
+# - List snippets in INSERT MODE with g:UltiSnipsListSnippets (default <c-tab>)
+#
+# - Following is also possible: select visually -> press trigger key -> enter trigger word -> press trigger key
+#
+# - Diacritics `a e.g. are part of the plugin vimtex.vim
+#
+# - see also surround capabilities of vimtex and vim-sandwich of commands and environments
+#
+# - for other LaTeX snippets see also these:
+#   https://github.com/honza/vim-snippets/blob/master/UltiSnips/tex.snippets
+#   https://github.com/honza/vim-snippets/blob/master/UltiSnips/texmath.snippets
+#   https://github.com/honza/vim-snippets/blob/master/snippets/tex.snippets
+
+
+# ----------
+# Structure:
+# ----------
+snippet EAB "Abstract" b
+\begin{abstract}
+  ${1:${VISUAL}}
+\end{abstract}$0
+endsnippet
+snippet EAP "Appendix" b
+\begin{appendix}
+  ${1:${VISUAL}}
+\end{appendix}$0
+endsnippet
+snippet ECE "Center" b
+\begin{center}
+  ${1:${VISUAL}}
+\end{center}$0
+endsnippet
+snippet EDO "Documentclass" b
+\documentclass[${2:<+options+>}]{${1:article}}
+
+\begin{document}
+${0:${VISUAL}}
+\end{document}
+endsnippet
+snippet EFC "Filecontents" b
+\begin{filecontents}
+  ${1:${VISUAL}}
+\end{filecontents}$0
+endsnippet
+snippet EFL "Flushleft" b
+\begin{flushleft}
+  ${1:${VISUAL}}
+\end{flushleft}$0
+endsnippet
+snippet EFR "Flushright" b
+\begin{flushright}
+  ${1:${VISUAL}}
+\end{flushright}$0
+endsnippet
+snippet EQN "Quotation" b
+\begin{quotation}
+  ${1:${VISUAL}}
+\end{quotation}$0
+endsnippet
+snippet EQE "Quote" b
+\begin{quote}
+  ${1:${VISUAL}}
+\end{quote}$0
+endsnippet
+snippet ESP "Sloppypar" b
+\begin{sloppypar}
+  ${1:${VISUAL}}
+\end{sloppypar}$0
+endsnippet
+snippet ETP "Titlepage" b
+\begin{titlepage}
+  ${1:${VISUAL}}
+\end{titlepage}$0
+endsnippet
+snippet EVM "Verbatim" b
+\begin{verbatim}
+  ${1:${VISUAL}}
+\end{verbatim}$0
+endsnippet
+snippet EVE "Verse" b
+\begin{verse}
+  ${1:${VISUAL}}
+\end{verse}$0
+endsnippet
+snippet ETB "Thebibliography" b
+\begin{thebibliography}
+  \bibitem[${1:<+biblabel+>}]{${2:<+bibkey+>}} ${3:${VISUAL}}
+\end{thebibliography}$0
+endsnippet
+snippet ENO "Note" b
+\begin{note}
+  ${1:${VISUAL}}
+\end{note}$0
+endsnippet
+snippet EVE "Overlay" b
+\begin{overlay}
+  ${1:${VISUAL}}
+\end{overlay}$0
+endsnippet
+snippet ESL "Slide" b
+\begin{slide}
+  ${1:${VISUAL}}
+\end{slide}$0
+endsnippet
+
+# ------
+# Lists:
+# ------
+snippet ELI "List" b
+\begin{list}{${1:<+label+>}}{${2:<+spacing+>}}
+  \item $3
+\end{list}$0
+endsnippet
+snippet EDE "Description" b
+\begin{description}
+  \item[${1:<+label+>}] $2
+\end{description}$0
+endsnippet
+snippet EEN "Enumerate" b
+\begin{enumerate}
+  \item $1
+\end{enumerate}$0
+endsnippet
+snippet EIT "List" b
+\begin{itemize}
+  \item $1
+\end{itemize}$0
+endsnippet
+snippet ETI "Theindex" b
+\begin{theindex}
+  \item $1
+\end{theindex}$0
+endsnippet
+snippet ETL "Trivlist" b
+\begin{trivlist}
+  \item $1
+\end{trivlist}$0
+endsnippet
+
+# -----
+# Math:
+# -----
+snippet EAL "Align" b
+\begin{align}
+  $1 &= $2\\
+  \label{eqn:${3:<+label+>}}
+\end{align}$0
+endsnippet
+snippet EAR "Array" b
+\left
+\begin{array}{${1:<+dimension+>}}
+  ${2:<+elements+>}
+\end{array}
+\right$0
+endsnippet
+snippet EDM "Displaymath" b
+\begin{displaymath}
+  ${1:${VISUAL}}
+\end{displaymath}$0
+endsnippet
+snippet EEA "Eqnarray (l2tabu)" b
+\begin{eqnarray}
+  ${1:${VISUAL}}
+  \label{eqn:${2:<+label+>}}
+\end{eqnarray}$0
+endsnippet
+snippet EEQ "Equation" b
+\begin{equation}
+  ${1:${VISUAL}}
+  \label{eqn:${2:<+label+>}}
+\end{equation}$0
+endsnippet
+snippet EMA "Math" b
+\begin{math}
+  ${1:${VISUAL}}
+\end{math}$0
+endsnippet
+
+# -------
+# Tables:
+# -------
+snippet ETE "Table & Tabular" b
+\begin{table}
+  \centering
+  \begin{tabular}{${1:<+dimensions+>}}
+    ${4:${VISUAL}}
+  \end{tabular}
+  \caption{${2:<+Caption text+>}}
+  \label{tab:${3:<+label+>}}
+\end{table}$0
+endsnippet
+snippet ETA "Table (new)" b
+\begin{table}
+  \centering
+  ${1:${VISUAL}}
+  \caption{${2:<+Caption text+>}}
+  \label{tab:${3:<+label+>}}
+\end{table}$0
+endsnippet
+snippet ETG "Tabbing (extended)" b
+\begin{tabbing}
+  $1 \= $2 \\\\
+  $3 \> $4
+\end{tabbing}$0
+endsnippet
+snippet ETR "Tabular (extended)" b
+\begin{tabular}[${1:<+hbtp+>}]{${2:<+format+>}}
+  $3 & $4 \\
+\end{tabular}$0
+endsnippet
+snippet EBT "BookTabs (new)" b
+\begin{tabular}[${1:<+hbtp+>}]{${2:<+format+>}} \toprule
+  ${3:head col 1} & ${4: head col 2} \\ \midrule
+  ${5:body cell 1} & ${6:body cell 2} \\
+  ${7:body cell 3} & ${8:body cell 4} \\ \bottomrule
+\end{tabular}
+endsnippet
+
+# --------------
+# Miscellaneous:
+# --------------
+# NOTE original EFI expands to this snippet only
+#      if g:Tex_package_detected =~ '\<graphicx\>'
+#      otherwise to psfig;
+snippet EFI "Figure" b
+\begin{figure}[${1:<+htpb+>}]
+  \centering
+  \includegraphics[${3:width=\linewidth}]{${2:${VISUAL:file}}}
+  \caption{${4:<+caption text+>}}
+  \label{fig:${5:<+label+>}}
+\end{figure}$0
+endsnippet
+snippet EFG "Figure (new)" b
+\begin{figure}[${1:<+htpb+>}]
+  \centering
+  ${VISUAL:\\includegraphics[${3:options}]\{\}}
+  \caption{${5:<+caption text+>}}
+  \label{fig:${6:<+label+>}}
+\end{figure}$0
+endsnippet
+snippet ELR "LRBox" b
+\begin{lrbox}{${1:<+\cmd+>}}
+  $2
+\end{lrbox}$0
+endsnippet
+snippet EMP "Minipage" b
+\begin{minipage}[${2:<+tb+>}][${3:<+height+>}][${4:<+inner-pos+>}]{${1:<+\linewidth+>}}
+  ${5:${VISUAL}}
+\end{minipage}$0
+endsnippet
+snippet EPI "Picture" b
+\begin{picture}(${1:<+width+>}, ${2:<+height+>})(${3:<+xoff+>},${4:<+yoff+>})
+  \put(${5:<+xoff+>},${6:<+yoff+>}){\framebox(${7:<++>},${8:<++>}){${9:<++>}}}
+\end{picture}$0
+endsnippet
+
+# ---------
+# Sections:
+# ---------
+snippet SPA "Part" b
+\part{${1:${VISUAL}}}$0
+endsnippet
+snippet SCH "Chapter" b
+\chapter{${1:${VISUAL}}}$0
+endsnippet
+snippet SSE "Section" b
+\section{${1:${VISUAL}}}$0
+endsnippet
+snippet SSS "Subsection" b
+\subsection{${1:${VISUAL}}}$0
+endsnippet
+snippet SS2 "Subsubsection" b
+\subsubsection{${1:${VISUAL}}}$0
+endsnippet
+snippet SPG "Paragraph" b
+\paragraph{${1:${VISUAL}}}$0
+endsnippet
+snippet SSP "Subparagraph" b
+\subparagraph{${1:${VISUAL}}}$0
+endsnippet
